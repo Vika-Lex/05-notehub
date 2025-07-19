@@ -7,7 +7,3 @@ export interface Note {
     tag: string
 }
 
-export enum Sorting {
-    CREATED = 'created',
-    UPDATED = 'updated',
-}

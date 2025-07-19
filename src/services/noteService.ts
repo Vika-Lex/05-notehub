@@ -1,10 +1,15 @@
 import axios from "axios";
-import {type Note, Sorting} from "../types/note.ts";
+import {type Note} from "../types/note.ts";
 import {API_URL} from "../constants";
 
 interface NoteResponse {
     notes: Note[];
     totalPages: number;
+}
+
+export enum Sorting {
+    CREATED = 'created',
+
 }
 
 export const getAllNotes = async (
@@ -43,11 +48,12 @@ export const createNote = async (note: Omit<Note, 'id' | 'createdAt' | 'updatedA
     return data;
 }
 
-export const deleteNote = async (id: number): Promise<void> => {
-    await axios.delete(`${API_URL}/notes/${id}`, {
+export const deleteNote = async (id: number): Promise<Note> => {
+    const {data} = await axios.delete<Note>(`${API_URL}/notes/${id}`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${import.meta.env.VITE_NOTEHUB_TOKEN}`,
         },
     });
+    return data;
 }

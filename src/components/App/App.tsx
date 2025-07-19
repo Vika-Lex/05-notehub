@@ -4,18 +4,20 @@ import {keepPreviousData, useQuery} from "@tanstack/react-query";
 import SearchBox from "../SearchBox/SearchBox.tsx";
 import Pagination from "../Pagination/Pagination.tsx";
 import {useState} from "react";
+import { useDebounce } from "use-debounce";
 import NoteList from "../NoteList/NoteList.tsx";
 import Modal from "../Modal/Modal.tsx";
 import NoteForm from "../NoteForm/NoteForm.tsx";
 
 const App = () => {
     const [query, setQuery] = useState<string>('')
+    const [debouncedQuery] = useDebounce(query, 500);
     const [page, setPage] = useState<number>(1)
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
     const {data, isError, isLoading} = useQuery({
-        queryKey: ['notes', query, page],
-        queryFn: () => NoteService.getAllNotes(query, page),
+        queryKey: ['notes', debouncedQuery, page],
+        queryFn: () => NoteService.getAllNotes( debouncedQuery, page),
         placeholderData: keepPreviousData
     })
 
@@ -29,7 +31,6 @@ const App = () => {
 
     const onCloseModal = () => {
         setIsModalOpen(false);
-
     }
 
     const setSearchQuery = (searchQuery: string) => {

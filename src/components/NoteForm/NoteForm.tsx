@@ -3,7 +3,7 @@ import {useFormik} from "formik";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import * as NoteService from "../../services/noteService.ts";
 import * as yup from 'yup';
-import {MdErrorOutline} from "react-icons/md";
+import ErrorMessage from "../ErrorMessage/ErrorMessage.tsx";
 
 
 interface NoteFormProps {
@@ -31,7 +31,6 @@ const NoteForm = ({onClear}: NoteFormProps) => {
             .min(3, 'Title must be at least 3 characters')
             .max(50, 'Title must be at most 50 characters'),
         content: yup.string()
-            .required('Content is required')
             .max(500, 'Content must be at most 500 characters'),
         tag: yup.string()
             .oneOf(['Todo', 'Work', 'Personal', 'Meeting', 'Shopping'], 'Invalid tag')
@@ -51,6 +50,8 @@ const NoteForm = ({onClear}: NoteFormProps) => {
             mutation.mutate(values)
         },
     })
+
+
 const isError = (key:string)=> {
         return Object.hasOwn(formik.errors, key);
 }
@@ -68,14 +69,11 @@ const isError = (key:string)=> {
                        onChange={formik.handleChange}
                        className={css.input}
                 />
+
+
                 {isError('title') && (
-                    <span
-                        className={css.error}
-                    >
-                    <MdErrorOutline/>
-                        {formik.errors.title}
-                </span>
-                )}
+                    <ErrorMessage message={formik.errors.title as string}/>
+                  )}
             </div>
 
             <div className={css.formGroup}>
@@ -88,13 +86,9 @@ const isError = (key:string)=> {
                     rows={8}
                     className={css.textarea}
                 />
+
                 {isError('content') && (
-                    <span
-                        className={css.error}
-                    >
-                    <MdErrorOutline/>
-                        {formik.errors.content}
-                </span>
+                    <ErrorMessage message={formik.errors.content as string} />
                 )}
             </div>
 
@@ -112,13 +106,9 @@ const isError = (key:string)=> {
                     <option value="Meeting">Meeting</option>
                     <option value="Shopping">Shopping</option>
                 </select>
+
                 {isError('tag') && (
-                    <span
-                        className={css.error}
-                    >
-                    <MdErrorOutline/>
-                        {formik.errors.tag}
-                </span>
+                    <ErrorMessage message={formik.errors.tag as string} />
                 )}
             </div>
 

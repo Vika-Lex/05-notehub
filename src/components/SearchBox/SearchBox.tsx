@@ -10,7 +10,7 @@ const SearchBox = ({query, setQuery}:SearchBoxProps) => {
 
 
     const [inputValue, setInputValue] = useState(query);
-    const [debouncedValue] = useDebounce(inputValue, 500); // 500 мс задержка
+    const [debouncedValue] = useDebounce(inputValue, 500);
 
     useEffect(() => {
         setQuery(debouncedValue);
