@@ -9,7 +9,6 @@ interface NoteResponse {
 
 export enum Sorting {
     CREATED = 'created',
-
 }
 
 export const getAllNotes = async (
@@ -35,7 +34,6 @@ export const getAllNotes = async (
         },
     });
     return data;
-
 }
 
 export const createNote = async (note: Omit<Note, 'id' | 'createdAt' | 'updatedAt'>): Promise<Note> => {

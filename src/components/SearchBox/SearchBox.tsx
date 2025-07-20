@@ -8,14 +8,12 @@ interface SearchBoxProps {
 }
 const SearchBox = ({query, setQuery}:SearchBoxProps) => {
 
-
     const [inputValue, setInputValue] = useState(query);
     const [debouncedValue] = useDebounce(inputValue, 500);
 
     useEffect(() => {
         setQuery(debouncedValue);
     }, [debouncedValue, setQuery]);
-
 
     return (
         <input
@@ -25,7 +23,6 @@ const SearchBox = ({query, setQuery}:SearchBoxProps) => {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
         />
-
     );
 };
 export default SearchBox

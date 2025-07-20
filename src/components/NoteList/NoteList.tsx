@@ -5,7 +5,6 @@ import * as NoteService from "../../services/noteService.ts";
 
 interface NoteListProps {
     notes: Note[],
-
 }
 
 const NoteList = ({notes}: NoteListProps) => {

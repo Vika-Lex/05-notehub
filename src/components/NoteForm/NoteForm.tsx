@@ -5,7 +5,6 @@ import * as NoteService from "../../services/noteService.ts";
 import * as yup from 'yup';
 import ErrorMessage from "../ErrorMessage/ErrorMessage.tsx";
 
-
 interface NoteFormProps {
     onClear: () => void,
 }

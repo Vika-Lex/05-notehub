@@ -18,7 +18,6 @@ const Modal = ({children, onCloseModal}:ModalProps) => {
         const handleEscape = (event: KeyboardEvent) => {
             if (event.key === 'Escape') {
                 onCloseModal()
-
             }
         };
 
@@ -26,7 +25,7 @@ const Modal = ({children, onCloseModal}:ModalProps) => {
         return () => {
             document.removeEventListener('keydown', handleEscape);
         };
-    }, []);
+    }, [onCloseModal]);
     return createPortal(
         (
             <div
