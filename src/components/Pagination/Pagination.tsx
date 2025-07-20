@@ -12,6 +12,7 @@ const Pagination = ({ totalPages, page, setPage }: PaginationProps) => {
     }
     const componentKey = `${page}-${totalPages}`;
 
+
     return (
         <ReactPaginate
             key={componentKey}

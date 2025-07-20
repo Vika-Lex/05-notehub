@@ -8,7 +8,6 @@ import {useDebounce} from "use-debounce";
 import NoteList from "../NoteList/NoteList.tsx";
 import Modal from "../Modal/Modal.tsx";
 import NoteForm from "../NoteForm/NoteForm.tsx";
-
 const App = () => {
     const [query, setQuery] = useState<string>('')
     const [debouncedQuery] = useDebounce(query, 500);
