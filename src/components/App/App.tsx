@@ -4,7 +4,7 @@ import {keepPreviousData, useQuery} from "@tanstack/react-query";
 import SearchBox from "../SearchBox/SearchBox.tsx";
 import Pagination from "../Pagination/Pagination.tsx";
 import {useState} from "react";
-import { useDebounce } from "use-debounce";
+import {useDebounce} from "use-debounce";
 import NoteList from "../NoteList/NoteList.tsx";
 import Modal from "../Modal/Modal.tsx";
 import NoteForm from "../NoteForm/NoteForm.tsx";
@@ -17,7 +17,7 @@ const App = () => {
 
     const {data, isError, isLoading} = useQuery({
         queryKey: ['notes', debouncedQuery, page],
-        queryFn: () => NoteService.getAllNotes( debouncedQuery, page),
+        queryFn: () => NoteService.getAllNotes(debouncedQuery, page),
         placeholderData: keepPreviousData
     })
 
@@ -31,6 +31,7 @@ const App = () => {
 
     const onCloseModal = () => {
         setIsModalOpen(false);
+
     }
 
     const setSearchQuery = (searchQuery: string) => {
@@ -42,12 +43,20 @@ const App = () => {
     return (
         <div className={css.app}>
             <header className={css.toolbar}>
-                <SearchBox query={query} setQuery={setSearchQuery}/>
+                <SearchBox query={query}
+                           setQuery={setSearchQuery}
+                />
                 {data && data.totalPages > 1 && (
-                    <Pagination page={page} setPage={setCurrentPage} totalPages={data.totalPages}/>
+                    <Pagination page={page}
+                                setPage={setCurrentPage}
+                                totalPages={data.totalPages}
+                    />
                 )}
 
-                <button className={css.button} onClick={onOpenModal}>Create note +</button>
+                <button className={css.button}
+                        onClick={onOpenModal}
+                >Create note +
+                </button>
 
             </header>
             {isModalOpen && (
