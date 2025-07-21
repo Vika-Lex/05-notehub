@@ -1,28 +1,18 @@
 import css from './SearchBox.module.css';
-import {useDebounce} from "use-debounce";
-import {useEffect, useState} from "react";
 
 interface SearchBoxProps {
     query: string;
     setQuery: (query: string) => void;
 }
-const SearchBox = ({query, setQuery}:SearchBoxProps) => {
-
-    const [inputValue, setInputValue] = useState(query);
-    const [debouncedValue] = useDebounce(inputValue, 500);
-
-    useEffect(() => {
-        setQuery(debouncedValue);
-    }, [debouncedValue, setQuery]);
-
+const SearchBox = ({ query, setQuery }: SearchBoxProps) => {
     return (
         <input
             className={css.input}
             type="text"
             placeholder="Search notes"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
         />
     );
 };
-export default SearchBox
+export default SearchBox;
